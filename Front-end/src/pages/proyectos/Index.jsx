@@ -165,6 +165,8 @@ const InscripcionProyecto = ({ idProyecto, estado, inscripciones }) => {
     }
   }, [data]);
 
+  //acá se deberia incluir el error?
+
   const confirmarInscripcion = () => {
     crearInscripcion({ variables: { proyecto: idProyecto, estudiante: userData._id } });
   };
