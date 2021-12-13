@@ -7,6 +7,7 @@ import { setContext } from '@apollo/client/link/context';
 import Index from 'pages/Index';
 // import Page2 from 'pages/Page2';
 import IndexCategory1 from 'pages/category1/Index';
+import EditarPerfil from 'pages/EditarPerfil'
 import Category1 from 'pages/category1/CategoryPage1';
 import IndexUsuarios from 'pages/usuarios';
 import EditarUsuario from 'pages/usuarios/editar';
@@ -49,7 +50,7 @@ function App() {
   const [authToken, setAuthToken] = useState('');
 
   const setToken = (token) => {
-    console.log('set token', token);
+    // console.log('set token', token);
     setAuthToken(token);
     if (token) {
       localStorage.setItem('token', JSON.stringify(token));
@@ -80,6 +81,7 @@ function App() {
             <Routes>
               <Route path='/' element={<PrivateLayout />}>
                 <Route path='' element={<Index />} />
+                <Route path='/editarPerfil/:_id' element={<EditarPerfil />} />
                 <Route path='/usuarios' element={<IndexUsuarios />} />
                 <Route path='/usuarios/editar/:_id' element={<EditarUsuario />} />
                 <Route path='/proyectos' element={<IndexProyectos />} />
