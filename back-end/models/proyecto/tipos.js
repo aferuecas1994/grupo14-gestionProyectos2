@@ -37,16 +37,16 @@ const tiposProyecto = gql`
     inscripciones: [Inscripcion]
   }
   type Query {
+    Proyecto(_id: String!): Proyecto
     Proyectos: [Proyecto]
-    ProyectosByLider: [Proyecto]
-    ProyectoByLider: Proyecto
+    ProyectosLider: [Proyecto]
   }
   type Mutation {
     crearProyecto(
       nombre: String!
-      presupuesto: Float!
       fechaInicio: Date!
       fechaFin: Date!
+      presupuesto: Float!
       lider: String!
       objetivos: [crearObjetivo]
     ): Proyecto

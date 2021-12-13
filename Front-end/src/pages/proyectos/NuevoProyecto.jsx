@@ -7,8 +7,10 @@ import DropDown from 'components/Dropdown';
 import ButtonLoading from 'components/ButtonLoading';
 import useFormData from 'hooks/useFormData';
 import { Enum_TipoObjetivo } from 'utils/enums';
+import { toast } from 'react-toastify';
 import { nanoid } from 'nanoid';
 import { ObjContext } from 'context/objContext';
+import Loading from '../../components/Loading';
 import { useObj } from 'context/objContext';
 import { CREAR_PROYECTO } from 'graphql/proyectos/mutations';
 
@@ -50,8 +52,19 @@ const NuevoProyecto = () => {
       variables: formData,
     });
   };
+  useEffect(() => {
+    if (mutationData) {
+      toast.success('Usuario modificado correctamente');
+    }
+  }, [mutationData]);
 
-  if (loading) return <div>...Loading</div>;
+  useEffect(() => {
+    if (mutationError) {
+      toast.error('Error modificando el usuario');
+    }
+  }, [mutationError]);
+
+  if (loading) return <Loading></Loading>;
 
   return (
     <div className='p-10 flex flex-col items-center'>

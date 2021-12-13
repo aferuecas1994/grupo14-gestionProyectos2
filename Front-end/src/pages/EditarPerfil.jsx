@@ -6,12 +6,11 @@ import Input from 'components/Input';
 import ButtonLoading from 'components/ButtonLoading';
 import useFormData from 'hooks/useFormData';
 import { toast } from 'react-toastify';
+import Loading from '../components/Loading';
+// import { EDITAR_PERFIL } from 'graphql/usuarios/mutations';
 import { EDITAR_USUARIO } from 'graphql/usuarios/mutations';
-import DropDown from 'components/Dropdown';
-import Loading from '../../components/Loading';
-import { Enum_EstadoUsuario } from 'utils/enums';
 
-const EditarUsuario = () => {
+const EditarPerfil = () => {
   const { form, formData, updateFormData } = useFormData(null);
   const { _id } = useParams();
 
@@ -24,13 +23,13 @@ const EditarUsuario = () => {
   });
 
 
-  const [editarUsuario, { data: mutationData, loading: mutationLoading, error: mutationError }] =
+  const [editarPerfil, { data: mutationData, loading: mutationLoading, error: mutationError }] =
     useMutation(EDITAR_USUARIO);
 
   const submitForm = (e) => {
     e.preventDefault();
-    delete formData.rol;
-    editarUsuario({
+    formData.estado = queryData.Usuario.estado;
+    editarPerfil({
       variables: { _id, ...formData },
     });
   };
@@ -52,13 +51,13 @@ const EditarUsuario = () => {
   }, [queryError, mutationError]);
 
   if (queryLoading) return <Loading></Loading>;
-  
+
   return (
     <div className='flew flex-col w-full h-full items-center justify-center p-10'>
-      <Link to='/usuarios'>
+      <Link to='/'>
         <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
       </Link>
-      <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Editar Usuario</h1>
+      <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Editar Perfil</h1>
       <form
         onSubmit={submitForm}
         onChange={updateFormData}
@@ -80,27 +79,21 @@ const EditarUsuario = () => {
           required={true}
         />
         <Input
-          label='Correo de la persona:'
-          type='email'
-          name='correo'
-          defaultValue={queryData.Usuario.correo}
-          required={true}
-        />
-        <Input
           label='Identificación de la persona:'
           type='text'
           name='identificacion'
           defaultValue={queryData.Usuario.identificacion}
           required={true}
         />
-        <DropDown
-          label='Estado de la persona:'
-          name='estado'
-          defaultValue={queryData.Usuario.estado}
+        <Input
+          label='Correo de la persona:'
+          type='email'
+          name='correo'
+          defaultValue={queryData.Usuario.correo}
           required={true}
-          options={Enum_EstadoUsuario}
         />
         <span>Rol del usuario: {queryData.Usuario.rol}</span>
+        <span>Estado del usuario: {queryData.Usuario.estado}</span>
         <ButtonLoading
           disabled={Object.keys(formData).length === 0}
           loading={mutationLoading}
@@ -111,4 +104,4 @@ const EditarUsuario = () => {
   );
 };
 
-export default EditarUsuario;
+export default EditarPerfil;

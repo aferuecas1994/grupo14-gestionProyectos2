@@ -28,7 +28,7 @@ const useFormData = (initial) => {
         obj[key] = value;
       }
     });
-    console.log(obj);
+    // console.log(obj);
     return obj;
   };
   const updateFormData = () => {

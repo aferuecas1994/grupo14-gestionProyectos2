@@ -1,0 +1,11 @@
+#auth{
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../assets/login/background.jpg);
+}
