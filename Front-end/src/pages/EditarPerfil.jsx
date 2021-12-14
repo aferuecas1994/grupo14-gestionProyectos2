@@ -29,6 +29,7 @@ const EditarPerfil = () => {
   const submitForm = (e) => {
     e.preventDefault();
     formData.estado = queryData.Usuario.estado;
+   
     editarPerfil({
       variables: { _id, ...formData },
     });
@@ -90,8 +91,15 @@ const EditarPerfil = () => {
           type='email'
           name='correo'
           defaultValue={queryData.Usuario.correo}
-          required={true}
+          required={true}        
         />
+        {/* <Input
+          label='Contraseña de correo de la persona:'
+          type='text'
+          name='contraseña'
+          defaultValue={queryData.Usuario.password}
+          required={true}
+        /> */}
         <span>Rol del usuario: {queryData.Usuario.rol}</span>
         <span>Estado del usuario: {queryData.Usuario.estado}</span>
         <ButtonLoading

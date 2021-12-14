@@ -38,7 +38,7 @@ const IndexProyectos = () => {
         <div className='flex w-full items-center justify-center'>
           <h1 className='text-2xl font-bold text-gray-900'>Lista de Proyectos</h1>
         </div>
-        <PrivateComponent roleList={['ADMINISTRADOR']}>
+        <PrivateComponent roleList={['ADMINISTRADOR', 'ESTUDIANTE']}>
         {queryData.Proyectos.map((proyecto) => {
           return <AccordionProyecto proyecto={proyecto} />;
         })}
