@@ -5,6 +5,7 @@ import perfil from '../assets/login/perfil.png';
 
 const Index = () => {
   const { userData } = useUser();
+
   return (
     <div className='flex flex-col h-full w-full items-center justify-cente bg-blue-50 p-40'>
       <img src={perfil} alt='Logo' className='items-center justify-center h-64' />
