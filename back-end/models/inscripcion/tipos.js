@@ -19,6 +19,7 @@ const tiposInscripcion = gql`
       Inscripcion
       
     aprobarInscripcion(id: String!): Inscripcion
+    rechazarInscripcion(id: String!): Inscripcion
   }
 `;
 

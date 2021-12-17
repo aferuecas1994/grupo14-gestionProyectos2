@@ -3,21 +3,35 @@ import { ModeloAvance } from './avance.js';
 const resolversAvance = {
   Query: {
     Avances: async (parent, args) => {
-      const avances = await ModeloAvance.find().populate('proyecto').populate('creadoPor');
-      
+      let filter = {};
+      if (args.project) {
+        filter = { ...args };
+      }
+      const avances = await ModeloAvance.find(filter).populate('proyecto').populate('creadoPor');
       return avances;
     },
-
-
     filtrarAvance: async (parents, args) => {
-      const avanceFiltrado = await ModeloAvance.find({ proyecto: args.idProyecto })
+      const avanceFiltrado = await ModeloAvance.find({ proyecto: args._id })
         .populate('proyecto')
         .populate('creadoPor');
+      return avanceFiltrado;
+    },
+    // Avances: async (parent, args) => {
+    //   const avances = await ModeloAvance.find().populate('proyecto').populate('creadoPor');
+      
+    //   return avances;
+    // },
+
+
+    // filtrarAvance: async (parents, args) => {
+    //   const avanceFiltrado = await ModeloAvance.find({ proyecto: args.idProyecto })
+    //     .populate('proyecto')
+    //     .populate('creadoPor');
         
 
 
-      return avanceFiltrado;
-    },
+    //   return avanceFiltrado;
+    // },
 
     avancesEstudiantes: async (parent, args) => { //HU_021
       const avancesEstudiantes = await ModeloAvance.find({creadoPor: args.creadoPor })
@@ -43,13 +57,10 @@ const resolversAvance = {
         proyecto: args.proyecto,
         creadoPor: args.creadoPor,
       });
-      if (args.rol==="ESTUDIANTE") {   
+     
         return avanceCreado;   
-      }
-      else {
-        return null;
-      }
-      //return avanceCreado;
+      
+      return avanceCreado;
     },
 
 

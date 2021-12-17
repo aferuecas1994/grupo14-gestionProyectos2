@@ -8,6 +8,7 @@ const PROYECTOS = gql`
       estado
       fase
       objetivos {
+        _id
         descripcion
         tipo
       }
@@ -26,12 +27,13 @@ const PROYECTOS = gql`
   }
 `;
 
-const PROYECTO = gql`
+const GET_PROYECTO = gql`
   query Proyecto($id: String!) {
     Proyecto(_id: $id) {
       nombre
       presupuesto
       objetivos {
+        _id
         descripcion
         tipo
       }
@@ -40,4 +42,4 @@ const PROYECTO = gql`
 `;
 
 
-export { PROYECTOS, PROYECTO };
+export { PROYECTOS, GET_PROYECTO };

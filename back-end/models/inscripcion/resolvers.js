@@ -50,7 +50,20 @@ const resolverInscripciones = {
         },
         { new: true }
       );
+      console.log(':D')
       return inscripcionAprobada;
+    },
+    rechazarInscripcion: async (parent, args) => {
+      console.log(':C')
+      const inscripcionRechazada= await InscriptionModel.findByIdAndUpdate(
+        args.id,
+        {
+          estado: 'RECHAZADO',
+          fechaIngreso: Date.now(),
+        },
+        { new: true }
+      );
+      return inscripcionRechazada;
     },
   },
 };
