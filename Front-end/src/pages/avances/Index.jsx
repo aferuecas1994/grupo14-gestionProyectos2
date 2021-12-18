@@ -11,23 +11,20 @@ import { useUser } from 'context/userContext';
 import { toast } from 'react-toastify';
 import PrivateComponent from 'components/PrivateComponent';
 import { nanoid } from 'nanoid';
-import Loading from '../../components/Loading';
+//import Loading from '../../components/Loading';
 
 const IndexAvance = () => {
   const { projectid } = useParams();
-
   const [openDialog, setOpenDialog] = useState(false);
+
   // falta captura de error del loading
   const { data, loading } = useQuery(GET_AVANCES, {
     variables: {
       project: projectid,
     },
   });
-
-  if (loading) return <Loading></Loading>;
-  console.log('projectid', projectid);
-  console.log('data', data)
   
+  if (loading) return <div>Loading...</div>;
   return (
     <div className='flex flex-col p-10 items-center w-full'>
       <h1 className='text-2xl font-bold text-gray-900 my-2'>

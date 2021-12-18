@@ -34,6 +34,21 @@ const resolversProyecto = {
     }
   },
 
+  // Proyectos: async (parent, args, context) => {
+  //   if (context.userData) {
+  //     if (context.userData.rol === 'LIDER') {
+  //       const proyectos = await ProjectModel.find({ lider: context.userData._id });
+  //       return proyectos;
+  //     } else if (context.userData.rol === 'LIDER') {
+        // LINEA COMENTADA POR DANIEL const proyectos = await ProjectModel.find({ lider: context.userData._id });
+        // LINEA COMENTADA POR DANIEL return proyectos;
+//       }
+//     }
+//     const proyectos = await ProjectModel.find();
+//     return proyectos;
+//   },
+// },
+
   Mutation: { //HU_012
     crearProyecto: async (parent, args, context) => {
       const proyectoCreado = await ProjectModel.create({
@@ -44,6 +59,7 @@ const resolversProyecto = {
         lider: args.lider,
         objetivos: args.objetivos,
       });
+      return proyectoCreado;
     },
 
     editarProyecto: async (parent, args) => { //HU_007-008-009-010
