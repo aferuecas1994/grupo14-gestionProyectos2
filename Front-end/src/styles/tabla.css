@@ -7,11 +7,11 @@
 .tabla td,
 .tabla th {
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #EAF2F8;
 }
 
 .tabla th {
-  background-color: #04aa46;
+  background-color: #2980B9;
   color: white;
   padding-top: 12px;
   padding-bottom: 12px;
@@ -23,5 +23,5 @@
 }
 
 .tabla tr:hover {
-  background-color: #ddd;
+  background-color: white;
 }

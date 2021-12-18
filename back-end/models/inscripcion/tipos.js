@@ -6,21 +6,20 @@ const tiposInscripcion = gql`
     estado: Enum_EstadoInscripcion!
     fechaIngreso: Date
     fechaEgreso: Date
-    proyecto: Proyecto!
+    proyecto(lider: String): Proyecto
     estudiante: Usuario!
   }
-
   type Query {
     Inscripciones: [Inscripcion]
   }
-
   type Mutation {
     crearInscripcion(
-      proyecto: String!
-      estudiante: String!
-    ): Inscripcion
-
+      proyecto: String!, 
+      estudiante: String!): 
+      Inscripcion
+      
     aprobarInscripcion(id: String!): Inscripcion
+    rechazarInscripcion(id: String!): Inscripcion
   }
 `;
 

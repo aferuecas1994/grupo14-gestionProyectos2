@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import PrivateRoute from 'components/PrivateRoute';
 import { GET_INSCRIPCIONES } from 'graphql/inscripciones/queries';
-import { APROBAR_INSCRIPCION } from 'graphql/inscripciones/mutaciones';
+import { APROBAR_INSCRIPCION, RECHAZAR_INSCRIPCION } from 'graphql/inscripciones/mutaciones';
 import ButtonLoading from 'components/ButtonLoading';
 import { toast } from 'react-toastify';
 import {
@@ -10,6 +10,7 @@ import {
   AccordionSummaryStyled,
   AccordionDetailsStyled,
 } from 'components/Accordion';
+//import {InsContext, useInsc } from '../../context/insContext';
 
 const IndexInscripciones = () => {
   const { data, loading, error, refetch } = useQuery(GET_INSCRIPCIONES);
@@ -35,6 +36,7 @@ const IndexInscripciones = () => {
           <AccordionInscripcion
             titulo='Inscripciones rechazadas'
             data={data.Inscripciones.filter((el) => el.estado === 'RECHAZADO')}
+            refetch={refetch}
           />
         </div>
       </div>
@@ -62,7 +64,8 @@ const AccordionInscripcion = ({ data, titulo, refetch = () => {} }) => {
 
 const Inscripcion = ({ inscripcion, refetch }) => {
   const [aprobarInscripcion, { data, loading, error }] = useMutation(APROBAR_INSCRIPCION);
-
+  const [rechazarInscripcion, { dataRechazar, loadingRechazar, errorRechazar }] = useMutation(RECHAZAR_INSCRIPCION);
+  
   useEffect(() => {
     if (data) {
       toast.success('Inscripcion aprobada con exito');
@@ -76,6 +79,19 @@ const Inscripcion = ({ inscripcion, refetch }) => {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (dataRechazar) {
+      toast.success('Inscripcion rechazando con exito');
+      refetch();
+    }
+  }, [dataRechazar]);
+
+  useEffect(() => {
+    if (errorRechazar) {
+      toast.error('Error rechazando la inscripcion');
+    }
+  }, [errorRechazar]);
+
   const cambiarEstadoInscripcion = () => {
     aprobarInscripcion({
       variables: {
@@ -83,6 +99,15 @@ const Inscripcion = ({ inscripcion, refetch }) => {
       },
     });
   };
+  
+  const cambiarEstadoInscripcionR = () => {
+    rechazarInscripcion({
+      variables: {
+        rechazarInscripcionId: inscripcion._id,
+      },
+    });
+  };
+  
 
   return (
     <div className='bg-gray-900 text-gray-50 flex flex-col p-6 m-2 rounded-lg shadow-xl'>
@@ -90,17 +115,33 @@ const Inscripcion = ({ inscripcion, refetch }) => {
       <span>{inscripcion.estudiante.nombre}</span>
       <span>{inscripcion.estado}</span>
       {inscripcion.estado === 'PENDIENTE' && (
-        <ButtonLoading
-          onClick={() => {
-            cambiarEstadoInscripcion();
-          }}
-          text='Aprobar Inscripcion'
-          loading={loading}
-          disabled={false}
-        />
+        <>
+          <ButtonLoading
+            onClick={() => {
+              cambiarEstadoInscripcion();
+            }}
+            text='Aprobar Inscripcion'
+            loading={loading}
+            disabled={false}
+          />
+          <ButtonLoading
+            onClick={() => {
+              cambiarEstadoInscripcionR();
+            }}
+            text='Rechazar Inscripcion'
+            loading={loadingRechazar}
+            disabled={false}
+          />
+        </>
       )}
     </div>
   );
 };
 
 export default IndexInscripciones;
+
+// <InsContext.Provider value = {{data, refetch}}>
+
+// </InsContext.Provider>
+
+// const {refetch} = useInsc();

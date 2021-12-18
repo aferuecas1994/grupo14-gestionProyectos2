@@ -11,18 +11,20 @@ const resolversUsuario = {
 
   Query: {
     Usuarios: async (parent, args, context) => {
-      const usuarios = await UserModel.find().populate([
-        {
-          path: 'inscripciones',
-          populate: {
-            path: 'proyecto',
-            populate: [{ path: 'lider' }, { path: 'avances' }],
-          },
-        },
-        {
-          path: 'proyectosLiderados',
-        },
-      ]);
+      const usuarios = await UserModel.find();
+      // .populate([
+      //   {
+      //     path: 'inscripciones',
+      //     populate: {
+      //       path: 'proyecto',
+      //       populate: [{ path: 'lider' }, { path: 'avances' }],
+      //     },
+      //   },
+      //   {
+      //     path: 'proyectosLiderados',
+      //   },
+      //   { new: true }
+      // ]);
       return usuarios;
     },
 
@@ -42,12 +44,6 @@ const resolversUsuario = {
         return null;
       }
     },
-
-
-
-
-
-
     Usuario: async (parent, args) => {
       const usuario = await UserModel.findOne({ _id: args._id });
       return usuario;
@@ -72,8 +68,6 @@ const resolversUsuario = {
 
       return usuarioCreado;
     },
-
-
     editarUsuario: async (parent, args) => { //HU_05
       const usuarioEditado = await UserModel.findByIdAndUpdate(
         args._id,
@@ -86,14 +80,20 @@ const resolversUsuario = {
         },
         { new: true }
       );
-
-      if (args.rol==="ADMINISTRADOR") {   
-        return usuarioEditado;;   
-      }
-      else {
-        return null;
-      }
-      
+        return usuarioEditado;      
+    },
+    editarPerfil: async (parent, args) => { //HU_03
+      const perfil = await UserModel.findByIdAndUpdate(
+        args._id,
+        {
+          nombre: args.nombre,
+          apellido: args.apellido,
+          identificacion: args.identificacion,
+          correo: args.correo,
+        },
+        { new: true }
+      );
+      return perfil;      
     },
     
     eliminarUsuario: async (parent, args) => {
