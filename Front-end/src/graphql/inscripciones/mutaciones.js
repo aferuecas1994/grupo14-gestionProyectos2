@@ -17,7 +17,7 @@ const APROBAR_INSCRIPCION = gql`
 `;
 
 const RECHAZAR_INSCRIPCION = gql`
-  mutation Mutation($rechazarInscripcionId: String!) {
+  mutation RechazarInscripcion($rechazarInscripcionId: String!) {
     rechazarInscripcion(id: $rechazarInscripcionId) {
       _id
     }
