@@ -19,6 +19,7 @@ import 'styles/globals.css';
 import 'styles/tabla.css';
 import NuevoProyecto from 'pages/proyectos/NuevoProyecto';
 import IndexInscripciones from 'pages/inscripciones/Index';
+import IndexAvances1 from 'pages/avances/IndexAvances';
 
 // import PrivateRoute from 'components/PrivateRoute';
 
@@ -85,7 +86,8 @@ function App() {
                 <Route path='/proyectos' element={<IndexProyectos />} />
                 <Route path='/proyectos/nuevo' element={<NuevoProyecto />} />
                 <Route path='/inscripciones' element={<IndexInscripciones />} />
-                <Route path='/avance' element={<IndexAvance />} />
+                <Route path='/avances' element={<IndexAvance />} />
+                <Route path='/avance/:projectid' element={<IndexAvances1 />} />
               </Route>
               <Route path='/auth' element={<AuthLayout />}>
                 <Route path='register' element={<Register />} />

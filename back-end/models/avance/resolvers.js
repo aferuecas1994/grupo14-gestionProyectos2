@@ -64,6 +64,7 @@ const resolversAvance = {
     },
 
 
+
   //},
   modificarAvance: async (parents,args) => {//HU_023
     const avanceModificado = ModeloAvance.findByIdAndUpdate({

@@ -88,13 +88,22 @@ const AccordionProyecto = ({ proyecto, rol }) => {
             /></h3>
           </PrivateComponent>
           <PrivateComponent roleList={['LIDER']}>
-            {proyecto.estado == 'ACTIVO' ?
-            <h3><b>Editar Proyecto</b> <i
-              className='mx-4 fas fa-pen text-green-600 hover:text-green-400'
-              onClick={() => {
-                setShowDialogLider(true);
-              }}
-            /></h3>: null}
+          {proyecto.estado == 'ACTIVO' ?
+            <>
+              <h3><b>Editar Proyecto</b> <i
+                className='mx-4 fas fa-pen text-green-600 hover:text-green-400'
+                onClick={() => {
+                  setShowDialogLider(true);
+                }}
+              /></h3>
+      
+              <Link
+                to={`/avance/${proyecto._id}`}
+                className='bg-yellow-700 p-1 rounded-lg text-white  hover:bg-yellow-500'
+              >
+                Visualizar Avances
+              </Link>
+            </>: null}
           </PrivateComponent>
           <PrivateComponent roleList={['ESTUDIANTE']}>
             <InscripcionProyecto
@@ -362,8 +371,15 @@ const InscripcionProyecto = ({ idProyecto, estado, inscripciones }) => {
 
   return (
     <>
+     
       {estadoInscripcion !== '' ? (
+        <div className='flex flex-col items-start'> 
         <span>Ya estas inscrito en este proyecto y el estado es {estadoInscripcion}</span>
+        {estadoInscripcion === "ACEPTADO" && (
+        <Link
+        to={`/avance/${idProyecto}`}
+        className='bg-orange-500 p-2 rounded-lg text-white my-2 hover:bg-orange-300'>Agregar Avance</Link>)}
+        </div>
       ) : (
         <ButtonLoading
           onClick={() => confirmarInscripcion()}

@@ -54,13 +54,13 @@ const NuevoProyecto = () => {
   };
   useEffect(() => {
     if (mutationData) {
-      toast.success('Usuario modificado correctamente');
+      toast.success('Proyecto creado correctamente');
     }
   }, [mutationData]);
 
   useEffect(() => {
     if (mutationError) {
-      toast.error('Error modificando el usuario');
+      toast.error('Error modificando el proyecto');
     }
   }, [mutationError]);
 

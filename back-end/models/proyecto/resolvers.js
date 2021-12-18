@@ -20,10 +20,18 @@ const resolversProyecto = {
   },
   Query: {
     Proyectos: async (parent, args, context) => {//HU_06-HU_019
+      if (context.userData){
+        if(context.userData.rol === 'LIDER'){
+          const proyectos = await ProjectModel.find({lider: context.userData._id});
+          return proyectos
+        }else if(context.userData.rol === 'LIDER'){
+          
+        }
+      }
       const proyectos = await ProjectModel.find ();
       return proyectos;
     },
-    Proyecto: async (parent, args) => { 
+/*     Proyecto: async (parent, args) => { 
       const proyecto = await ProjectModel.findById({ _id: args._id });
       return proyecto ;   
     },
@@ -31,7 +39,7 @@ const resolversProyecto = {
       const proyectosLider = await ProjectModel.find({ lider: args._id })
       .populate('lider'); 
       return proyectosLider ;   
-    }
+    } */
   },
 
   Mutation: { //HU_012

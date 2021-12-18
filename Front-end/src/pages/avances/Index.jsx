@@ -13,7 +13,7 @@ import PrivateComponent from 'components/PrivateComponent';
 import { nanoid } from 'nanoid';
 import Loading from '../../components/Loading';
 
-const IndexAvance = () => {
+const IndexAvance1 = () => {
   const { projectid } = useParams();
 
   const [openDialog, setOpenDialog] = useState(false);
@@ -192,4 +192,4 @@ const CrearAvance = ({ proyecto, setOpenDialog }) => {
   );
 };
 
-export default IndexAvance;
+export default IndexAvance1;
