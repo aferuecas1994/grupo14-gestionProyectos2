@@ -10,6 +10,7 @@ import {
   AccordionSummaryStyled,
   AccordionDetailsStyled,
 } from 'components/Accordion';
+//import {InsContext, useInsc } from '../../context/insContext';
 
 const IndexInscripciones = () => {
   const { data, loading, error, refetch } = useQuery(GET_INSCRIPCIONES);
@@ -35,6 +36,7 @@ const IndexInscripciones = () => {
           <AccordionInscripcion
             titulo='Inscripciones rechazadas'
             data={data.Inscripciones.filter((el) => el.estado === 'RECHAZADO')}
+            refetch={refetch}
           />
         </div>
       </div>
@@ -82,13 +84,13 @@ const Inscripcion = ({ inscripcion, refetch }) => {
       toast.success('Inscripcion rechazando con exito');
       refetch();
     }
-  }, [data]);
+  }, [dataRechazar]);
 
   useEffect(() => {
     if (errorRechazar) {
       toast.error('Error rechazando la inscripcion');
     }
-  }, [error]);
+  }, [errorRechazar]);
 
   const cambiarEstadoInscripcion = () => {
     aprobarInscripcion({
@@ -101,7 +103,7 @@ const Inscripcion = ({ inscripcion, refetch }) => {
   const cambiarEstadoInscripcionR = () => {
     rechazarInscripcion({
       variables: {
-        rechazarInscripcion: inscripcion._id,
+        rechazarInscripcionId: inscripcion._id,
       },
     });
   };
@@ -137,3 +139,9 @@ const Inscripcion = ({ inscripcion, refetch }) => {
 };
 
 export default IndexInscripciones;
+
+// <InsContext.Provider value = {{data, refetch}}>
+
+// </InsContext.Provider>
+
+// const {refetch} = useInsc();
