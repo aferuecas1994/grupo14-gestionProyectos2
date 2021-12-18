@@ -24,7 +24,7 @@ import {
 import { Enum_FaseProyecto } from 'utils/enums';
 
 const IndexProyectos = () => {
-  const { data: queryData, loading, error } = useQuery(PROYECTOS);
+  const { data: queryData, loading } = useQuery(PROYECTOS);
   const { userData } = useUser();
 
   const [objetivosEspecificos,setObejetivosEspecificos] = useState([]);

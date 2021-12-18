@@ -13,7 +13,7 @@ import {
 //import {InsContext, useInsc } from '../../context/insContext';
 
 const IndexInscripciones = () => {
-  const { data, loading, error, refetch } = useQuery(GET_INSCRIPCIONES);
+  const { data, loading, refetch } = useQuery(GET_INSCRIPCIONES);
 
   useEffect(() => {
     console.log(data);
